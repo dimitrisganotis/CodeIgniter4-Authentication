@@ -32,11 +32,12 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
-$routes->get('register', 'Auth::registrationForm');
-$routes->post('register', 'Auth::registerUser');
-$routes->get('login', 'Auth::loginForm');
-$routes->post('login', 'Auth::loginUser');
-$routes->post('logout', 'Auth::logoutUser');
+$routes->get('register', 'Auth::registrationForm', ['as' => 'registrationForm']);
+$routes->post('register', 'Auth::registerUser', ['as' => 'registerUser']);
+$routes->get('login', 'Auth::loginForm', ['as' => 'loginForm']);
+$routes->post('login', 'Auth::loginUser', ['as' => 'loginUser']);
+$routes->post('logout', 'Auth::logoutUser', ['as' => 'logoutUser']);
+$routes->get('dashboard', 'Home::dashboard', ['as' => 'dashboard']);
 
 /*
 $routes->get('products', 'Product::feature');

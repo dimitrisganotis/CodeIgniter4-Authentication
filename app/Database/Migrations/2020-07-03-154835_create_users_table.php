@@ -6,8 +6,6 @@ class CreateUsersTable extends Migration
 {
 	public function up()
 	{
-        //$this->forge->createDatabase(env('database.default.database'));
-
         $this->forge->addField([
 			'id' => [
 				'type' => 'INT',
@@ -28,9 +26,19 @@ class CreateUsersTable extends Migration
             'password' => [
 				'type' => 'VARCHAR',
 				'constraint' => '255',
-            ],
+			],
+			'created_at' => [
+				'type' => 'datetime',
+				'null' => true
+			],
+			'updated_at' => [
+				'type' => 'datetime',
+				'null' => true
+			],
+			/*
             'created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP',
-            'updated_at TIMESTAMP NULL',
+			'updated_at TIMESTAMP NULL',
+			*/
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('users');

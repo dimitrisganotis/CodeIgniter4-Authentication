@@ -17,6 +17,7 @@ class Validation
 		\CodeIgniter\Validation\FormatRules::class,
 		\CodeIgniter\Validation\FileRules::class,
 		\CodeIgniter\Validation\CreditCardRules::class,
+		\App\Validation\CustomRules::class,
 	];
 
 	/**
@@ -50,5 +51,20 @@ class Validation
 			'rules' => 'required|matches[password]',
 			'label' => 'Confirm Password',
 		],
+	];
+
+	public $loginRules = [
+        'email' => [
+			'rules' => 'required|valid_email',
+			'label' => 'Email Address',
+		],
+        'password' => [
+			'rules' => 'required|validateUser[email,password]',
+			'label' => 'Password',
+			'errors' => [
+                'validateUser' => 'Incorrect username or password.'
+            ]
+		],
+
     ];
 }

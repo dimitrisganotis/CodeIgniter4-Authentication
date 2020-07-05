@@ -6,24 +6,21 @@ class UsersModel extends Model
 {
     protected $table = 'users';
     protected $primaryKey = 'id';
+    protected $returnType = 'object';
+    protected $allowedFields = ['name', 'email', 'email_verified_at', 'password'];
     protected $useTimestamps = true;
-    protected $returnType = 'object';
+    protected $skipValidation = true;
+    protected $beforeInsert = ['hashPassword'];
+    protected $beforeUpdate = ['hashPassword'];
 
-    /*
-    protected $returnType = 'object';
-    protected $useSoftDeletes = true;
+    protected function hashPassword(array $data)
+    {
+        if (!isset($data['data']['password'])) return $data;
 
-    protected $allowedFields = ['name', 'email'];
+        $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
 
-    protected $useTimestamps = false;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
-
-    protected $validationRules    = [];
-    protected $validationMessages = [];
-    protected $skipValidation     = false;
-    */
+        return $data;
+    }
 
     /*public function getNews($slug = false)
     {
