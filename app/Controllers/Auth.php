@@ -5,15 +5,6 @@ use \CodeIgniter\Exceptions\PageNotFoundException;
 
 class Auth extends BaseController
 {
-    public function index()
-    {
-        $users = new UsersModel();
-
-        return view('profile', [
-            'user' => $users->find(1)
-        ]);
-    }
-
     public function registrationForm()
     {
         if(session('id')) return redirect()->route('dashboard');
@@ -76,5 +67,12 @@ class Auth extends BaseController
         ]);
 
 		return redirect()->route('dashboard');
+    }
+
+    public function logoutUser()
+    {
+        session()->destroy();
+
+        return redirect()->route('loginForm');
     }
 }
